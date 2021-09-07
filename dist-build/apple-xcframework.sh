@@ -278,20 +278,20 @@ build_catalyst() {
 mkdir -p "${PREFIX}/tmp"
 echo "Building for macOS..."
 build_macos >"$LOG_FILE" 2>&1 || exit 1
-echo "Building for iOS..."
-build_ios >"$LOG_FILE" 2>&1 || exit 1
-echo "Building for the iOS simulator..."
-build_ios_simulator >"$LOG_FILE" 2>&1 || exit 1
-echo "Building for watchOS..."
-build_watchos >"$LOG_FILE" 2>&1 || exit 1
-echo "Building for the watchOS simulator..."
-build_watchos_simulator >"$LOG_FILE" 2>&1 || exit 1
-echo "Building for tvOS..."
-build_tvos >"$LOG_FILE" 2>&1 || exit 1
-echo "Building for the tvOS simulator..."
-build_tvos_simulator >"$LOG_FILE" 2>&1 || exit 1
-echo "Building for Catalyst..."
-build_catalyst >"$LOG_FILE" 2>&1 || exit 1
+# echo "Building for iOS..."
+# build_ios >"$LOG_FILE" 2>&1 || exit 1
+# echo "Building for the iOS simulator..."
+# build_ios_simulator >"$LOG_FILE" 2>&1 || exit 1
+# echo "Building for watchOS..."
+# build_watchos >"$LOG_FILE" 2>&1 || exit 1
+# echo "Building for the watchOS simulator..."
+# build_watchos_simulator >"$LOG_FILE" 2>&1 || exit 1
+# echo "Building for tvOS..."
+# build_tvos >"$LOG_FILE" 2>&1 || exit 1
+# echo "Building for the tvOS simulator..."
+# build_tvos_simulator >"$LOG_FILE" 2>&1 || exit 1
+# echo "Building for Catalyst..."
+# build_catalyst >"$LOG_FILE" 2>&1 || exit 1
 
 echo "Adding the Clibsodium module map for Swift..."
 
@@ -316,133 +316,133 @@ for ext in a dylib; do
   fi
 done
 
-echo "Bundling iOS targets..."
+# echo "Bundling iOS targets..."
+# 
+# mkdir -p "${PREFIX}/ios/lib"
+# cp -a "${IOS64_PREFIX}/include" "${PREFIX}/ios/"
+# for ext in a dylib; do
+#   lipo -create \
+#     "$IOS32_PREFIX/lib/libsodium.${ext}" \
+#     "$IOS32s_PREFIX/lib/libsodium.${ext}" \
+#     "$IOS64_PREFIX/lib/libsodium.${ext}" \
+#     -output "$PREFIX/ios/lib/libsodium.${ext}"
+# done
+# 
+# echo "Bundling iOS simulators..."
+# 
+# mkdir -p "${PREFIX}/ios-simulators/lib"
+# cp -a "${IOS_SIMULATOR_X86_64_PREFIX}/include" "${PREFIX}/ios-simulators/"
+# for ext in a dylib; do
+#   if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
+#     lipo -create \
+#       "${IOS_SIMULATOR_ARM64_PREFIX}/lib/libsodium.${ext}" \
+#       "${IOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
+#       "${IOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/ios-simulators/lib/libsodium.${ext}" || exit 1
+#   else
+#     lipo -create \
+#       "${IOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
+#       "${IOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/ios-simulators/lib/libsodium.${ext}" || exit 1
+#   fi
+# done
+# 
+# echo "Bundling watchOS targets..."
+# 
+# mkdir -p "${PREFIX}/watchos/lib"
+# cp -a "${WATCHOS64_32_PREFIX}/include" "${PREFIX}/watchos/"
+# for ext in a dylib; do
+#   lipo -create \
+#     "${WATCHOS32_PREFIX}/lib/libsodium.${ext}" \
+#     "${WATCHOS64_32_PREFIX}/lib/libsodium.${ext}" \
+#     -output "${PREFIX}/watchos/lib/libsodium.${ext}"
+# done
 
-mkdir -p "${PREFIX}/ios/lib"
-cp -a "${IOS64_PREFIX}/include" "${PREFIX}/ios/"
-for ext in a dylib; do
-  lipo -create \
-    "$IOS32_PREFIX/lib/libsodium.${ext}" \
-    "$IOS32s_PREFIX/lib/libsodium.${ext}" \
-    "$IOS64_PREFIX/lib/libsodium.${ext}" \
-    -output "$PREFIX/ios/lib/libsodium.${ext}"
-done
+# echo "Bundling watchOS simulators..."
+# 
+# mkdir -p "${PREFIX}/watchos-simulators/lib"
+# cp -a "${WATCHOS_SIMULATOR_X86_64_PREFIX}/include" "${PREFIX}/watchos-simulators/"
+# for ext in a dylib; do
+#   if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
+#     lipo -create \
+#       "${WATCHOS_SIMULATOR_ARM64_PREFIX}/lib/libsodium.${ext}" \
+#       "${WATCHOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
+#       "${WATCHOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/watchos-simulators/lib/libsodium.${ext}"
+#   else
+#     lipo -create \
+#       "${WATCHOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
+#       "${WATCHOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/watchos-simulators/lib/libsodium.${ext}"
+#   fi
+# done
+# 
+# echo "Bundling tvOS targets..."
+# 
+# mkdir -p "${PREFIX}/tvos/lib"
+# cp -a "${TVOS64_PREFIX}/include" "${PREFIX}/tvos/"
+# for ext in a dylib; do
+#   lipo -create \
+#     "$TVOS64_PREFIX/lib/libsodium.${ext}" \
+#     -output "$PREFIX/tvos/lib/libsodium.${ext}"
+# done
+# 
+# echo "Bundling tvOS simulators..."
+# 
+# mkdir -p "${PREFIX}/tvos-simulators/lib"
+# cp -a "${TVOS_SIMULATOR_X86_64_PREFIX}/include" "${PREFIX}/tvos-simulators/"
+# for ext in a dylib; do
+#   if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
+#     lipo -create \
+#       "${TVOS_SIMULATOR_ARM64_PREFIX}/lib/libsodium.${ext}" \
+#       "${TVOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/tvos-simulators/lib/libsodium.${ext}" || exit 1
+#   else
+#     lipo -create \
+#       "${TVOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/tvos-simulators/lib/libsodium.${ext}" || exit 1
+#   fi
+# done
 
-echo "Bundling iOS simulators..."
+# echo "Bundling Catalyst targets..."
+# 
+# mkdir -p "${PREFIX}/catalyst/lib"
+# cp -a "${CATALYST_X86_64_PREFIX}/include" "${PREFIX}/catalyst/"
+# for ext in a dylib; do
+#   if [ ! -f "${CATALYST_X86_64_PREFIX}/lib/libsodium.${ext}" ]; then
+#     continue
+#   fi
+#   if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
+#     lipo -create \
+#       "${CATALYST_ARM64_PREFIX}/lib/libsodium.${ext}" \
+#       "${CATALYST_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/catalyst/lib/libsodium.${ext}"
+#   else
+#     lipo -create \
+#       "${CATALYST_X86_64_PREFIX}/lib/libsodium.${ext}" \
+#       -output "${PREFIX}/catalyst/lib/libsodium.${ext}"
+#   fi
+# done
 
-mkdir -p "${PREFIX}/ios-simulators/lib"
-cp -a "${IOS_SIMULATOR_X86_64_PREFIX}/include" "${PREFIX}/ios-simulators/"
-for ext in a dylib; do
-  if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
-    lipo -create \
-      "${IOS_SIMULATOR_ARM64_PREFIX}/lib/libsodium.${ext}" \
-      "${IOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
-      "${IOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/ios-simulators/lib/libsodium.${ext}" || exit 1
-  else
-    lipo -create \
-      "${IOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
-      "${IOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/ios-simulators/lib/libsodium.${ext}" || exit 1
-  fi
-done
-
-echo "Bundling watchOS targets..."
-
-mkdir -p "${PREFIX}/watchos/lib"
-cp -a "${WATCHOS64_32_PREFIX}/include" "${PREFIX}/watchos/"
-for ext in a dylib; do
-  lipo -create \
-    "${WATCHOS32_PREFIX}/lib/libsodium.${ext}" \
-    "${WATCHOS64_32_PREFIX}/lib/libsodium.${ext}" \
-    -output "${PREFIX}/watchos/lib/libsodium.${ext}"
-done
-
-echo "Bundling watchOS simulators..."
-
-mkdir -p "${PREFIX}/watchos-simulators/lib"
-cp -a "${WATCHOS_SIMULATOR_X86_64_PREFIX}/include" "${PREFIX}/watchos-simulators/"
-for ext in a dylib; do
-  if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
-    lipo -create \
-      "${WATCHOS_SIMULATOR_ARM64_PREFIX}/lib/libsodium.${ext}" \
-      "${WATCHOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
-      "${WATCHOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/watchos-simulators/lib/libsodium.${ext}"
-  else
-    lipo -create \
-      "${WATCHOS_SIMULATOR_I386_PREFIX}/lib/libsodium.${ext}" \
-      "${WATCHOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/watchos-simulators/lib/libsodium.${ext}"
-  fi
-done
-
-echo "Bundling tvOS targets..."
-
-mkdir -p "${PREFIX}/tvos/lib"
-cp -a "${TVOS64_PREFIX}/include" "${PREFIX}/tvos/"
-for ext in a dylib; do
-  lipo -create \
-    "$TVOS64_PREFIX/lib/libsodium.${ext}" \
-    -output "$PREFIX/tvos/lib/libsodium.${ext}"
-done
-
-echo "Bundling tvOS simulators..."
-
-mkdir -p "${PREFIX}/tvos-simulators/lib"
-cp -a "${TVOS_SIMULATOR_X86_64_PREFIX}/include" "${PREFIX}/tvos-simulators/"
-for ext in a dylib; do
-  if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
-    lipo -create \
-      "${TVOS_SIMULATOR_ARM64_PREFIX}/lib/libsodium.${ext}" \
-      "${TVOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/tvos-simulators/lib/libsodium.${ext}" || exit 1
-  else
-    lipo -create \
-      "${TVOS_SIMULATOR_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/tvos-simulators/lib/libsodium.${ext}" || exit 1
-  fi
-done
-
-echo "Bundling Catalyst targets..."
-
-mkdir -p "${PREFIX}/catalyst/lib"
-cp -a "${CATALYST_X86_64_PREFIX}/include" "${PREFIX}/catalyst/"
-for ext in a dylib; do
-  if [ ! -f "${CATALYST_X86_64_PREFIX}/lib/libsodium.${ext}" ]; then
-    continue
-  fi
-  if [ "$APPLE_SILICON_SUPPORTED" = "true" ]; then
-    lipo -create \
-      "${CATALYST_ARM64_PREFIX}/lib/libsodium.${ext}" \
-      "${CATALYST_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/catalyst/lib/libsodium.${ext}"
-  else
-    lipo -create \
-      "${CATALYST_X86_64_PREFIX}/lib/libsodium.${ext}" \
-      -output "${PREFIX}/catalyst/lib/libsodium.${ext}"
-  fi
-done
-
-echo "Creating Clibsodium.xcframework..."
-
-rm -rf "${PREFIX}/Clibsodium.xcframework"
-
-XCFRAMEWORK_ARGS=""
-for f in macos ios ios-simulators watchos watchos-simulators tvos tvos-simulators catalyst; do
-  XCFRAMEWORK_ARGS="${XCFRAMEWORK_ARGS} -library ${PREFIX}/${f}/lib/libsodium.a"
-  XCFRAMEWORK_ARGS="${XCFRAMEWORK_ARGS} -headers ${PREFIX}/${f}/include"
-done
-xcodebuild -create-xcframework \
-  ${XCFRAMEWORK_ARGS} \
-  -output "${PREFIX}/Clibsodium.xcframework" >/dev/null
-
-ls -ld -- "$PREFIX"
-ls -l -- "$PREFIX"
-ls -l -- "$PREFIX/Clibsodium.xcframework"
-
-echo "Done!"
-
-# Cleanup
-rm -rf -- "$PREFIX/tmp"
-make distclean >/dev/null
+# echo "Creating Clibsodium.xcframework..."
+# 
+# rm -rf "${PREFIX}/Clibsodium.xcframework"
+# 
+# XCFRAMEWORK_ARGS=""
+# for f in macos ios ios-simulators watchos watchos-simulators tvos tvos-simulators catalyst; do
+#   XCFRAMEWORK_ARGS="${XCFRAMEWORK_ARGS} -library ${PREFIX}/${f}/lib/libsodium.a"
+#   XCFRAMEWORK_ARGS="${XCFRAMEWORK_ARGS} -headers ${PREFIX}/${f}/include"
+# done
+# xcodebuild -create-xcframework \
+#   ${XCFRAMEWORK_ARGS} \
+#   -output "${PREFIX}/Clibsodium.xcframework" >/dev/null
+# 
+# ls -ld -- "$PREFIX"
+# ls -l -- "$PREFIX"
+# ls -l -- "$PREFIX/Clibsodium.xcframework"
+# 
+# echo "Done!"
+# 
+# # Cleanup
+# rm -rf -- "$PREFIX/tmp"
+# make distclean >/dev/null

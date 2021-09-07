@@ -40,18 +40,18 @@ while [ $# -ne 0 ]; do
   shift
 done
 
-if [ -s configure ]; then
-  if [ "$force" != true ]; then
-    echo "autoconf scripts already exist." >&2
-    exit 0
-  fi
-elif [ "$dev_setup" != true ]; then
-  echo "If you are looking to install a stable version of libsodium,"
-  echo "please do not run arbitrary, undocumented commands."
-  echo
-  echo "Installation instructions are available at https://libsodium.org"
-  exit 0
-fi
+# if [ -s configure ]; then
+#   if [ "$force" != true ]; then
+#     echo "autoconf scripts already exist." >&2
+#     exit 0
+#   fi
+# elif [ "$dev_setup" != true ]; then
+#   echo "If you are looking to install a stable version of libsodium,"
+#   echo "please do not run arbitrary, undocumented commands."
+#   echo
+#   echo "Installation instructions are available at https://libsodium.org"
+#   exit 0
+# fi
 
 if glibtoolize --version >/dev/null 2>&1; then
   LIBTOOLIZE='glibtoolize'
